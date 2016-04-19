@@ -30,8 +30,8 @@ RUN wget https://github.com/agordon/libgtextutils/releases/download/0.7/libgtext
     wget https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2 && \
     tar -xvf fastx_toolkit-0.0.14.tar.bz2 && \
     cd fastx_toolkit-0.0.14 && \
-    make && \
     ./configure && \
+    make && \
     sudo make install && \
     cd .. && \
     rm -rf fas* lib*
