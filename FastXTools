@@ -14,7 +14,7 @@
 #########################################################################################
 
 # Set the base image to Ubuntu #
-FROM biodckr/biodocker:latest
+FROM biodckr/biodocker
 
 # Change user to root #
 USER root
