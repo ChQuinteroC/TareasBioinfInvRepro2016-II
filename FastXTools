@@ -8,44 +8,38 @@
 # Website:          http://hannonlab.cshl.edu/fastx_toolkit/                            #
 # Tags:             Genomics                                                            #
 # Base Image:       biodckr/biodocker                                                   #
-# Build Cmd:        docker build biodckr/FastXTools 0.0.14/ .                           #
+# Build Cmd:        docker build biodckr/FastXTools 0.0.14                              #
 # Pull Cmd:         docker pull biodckr/FastxTools                                      #
 # Run Cmd:          docker run biodckr/FastxTools /bin/bash                             #
 #########################################################################################
 
-# Set the base image to Ubuntu
+# Set the base image to Ubuntu #
 FROM biodckr/biodocker
 
+# Change user to root #
+USER root
+
 ######################### Begin Installation #########################
-ENV ZIP=libgtextutils-0.7.tar.gz
-ENV ZIP2=fastx_toolkit-0.0.14.tar.bz2
-ENV URL=https://github.com/agordon/libgtextutils/releases/download/0.7/libgtextutils-0.7.tar.gz
-ENV URL2=https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2
-ENV FOLDER=libgtextutils-0.7
-ENV FOLDER2=fastx_toolkit-0.0.14
-ENV DST=/home/biodocker/bin
-ENV DST2=
-
-RUN wget $URL/$ZIP -O $DST/$ZIP && \
-    tar -xvf $DST/$ZIP -C $DST && \
-    rm $DST/$ZIP && \
-    cd $DST/$FOLDER && \
+RUN wget https://github.com/agordon/libgtextutils/releases/download/0.7/libgtextutils-0.7.tar.gz && \
+    tar -xvf libgtextutils-0.7.tar.gz && \
+    cd libgtextutils-0.7 && \
     ./configure && \
     make && \
-    make install && \
-    cd / && \
-    rm -rf $DST/$FOLDER
-    wget $URL2/$ZIP2 -O $DST2/$ZIP2 && \
-    tar -xvf $DST2/$ZIP2 -C $DST2 && \
-    rm $DST2/$ZIP2 && \
-    cd $DST2/$FOLDER2 && \
-    ./configure && \
+    sudo make install && \
+    cd .. && \
+    wget https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2 && \
+    tar -xvf fastx_toolkit-0.0.14.tar.bz2 && \
+    cd fastx_toolkit-0.0.14 && \
     make && \
-    make install && \
-    cd / && \
-    rm -rf $DST2/$FOLDER2
+    ./configure && \
+    sudo make install && \
+    cd .. && \
+    rm -rf fas* lib*
 
-#Set working directory /data
+#Change user to back to biodocker 
+USER biodocker
+	
+##Set working directory /data
 WORKDIR /data/
 
 ######################### Installation end #########################
@@ -53,3 +47,4 @@ WORKDIR /data/
 # File Author / Maintainer
 MAINTAINER Christian A. Quintero <ca_quinteroc@hotmail.com>
 # Modified by Christian A. Quintero 09-04-2016
+
