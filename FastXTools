@@ -8,7 +8,7 @@
 # Website:          http://hannonlab.cshl.edu/fastx_toolkit/                            #
 # Tags:             Genomics                                                            #
 # Base Image:       biodckr/biodocker                                                   #
-# Build Cmd:        docker build biodckr/FastXTools 0.0.14                              #
+# Build Cmd:        docker build biodckr/FastXTools:0.0.14                              #
 # Pull Cmd:         docker pull biodckr/FastxTools                                      #
 # Run Cmd:          docker run biodckr/FastxTools /bin/bash                             #
 #########################################################################################
